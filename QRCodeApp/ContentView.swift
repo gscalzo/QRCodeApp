@@ -8,14 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = QRCodeViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationSplitView {
+            HistorySidebarView(viewModel: viewModel)
+        } detail: {
+            QRCodeGeneratorView(viewModel: viewModel)
         }
-        .padding()
+        .navigationSplitViewStyle(.balanced)
+        .alert(isPresented: errorBinding) {
+            Alert(
+                title: Text("Something went wrong"),
+                message: Text(viewModel.errorMessage ?? "Unknown error"),
+                dismissButton: .default(Text("OK")) { viewModel.dismissError() }
+            )
+        }
+    }
+
+    private var errorBinding: Binding<Bool> {
+        Binding(
+            get: { viewModel.errorMessage != nil },
+            set: { newValue in
+                if newValue == false {
+                    viewModel.dismissError()
+                }
+            }
+        )
     }
 }
 
