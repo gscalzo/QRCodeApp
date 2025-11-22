@@ -1,0 +1,1 @@
+Im getting this error while saving the png: it might be releate to the sandbox mode. Search in internet what could be the cause and fix it
