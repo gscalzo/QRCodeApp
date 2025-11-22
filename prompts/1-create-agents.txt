@@ -1,0 +1,37 @@
+Create a file named AGENTS.md that analyses the current macOS Xcode project and includes information regarding the following sections:
+
+# unit tests
+- Use XCTest for Unit and UI Tests.
+- Implement unit tests to ensure that the code works as intended. 
+- Run the tests before making any changes, add tests to verify the changes, and ensure that the tests pass before considering the session complete. 
+
+# xcodebuild 
+To save context, use the tool xcsift to format the output of xcodebuild or Swift. 
+OVERVIEW: A Swift tool to parse and format xcodebuild output for coding agents
+xcsift reads xcodebuild output from stdin and outputs structured JSON.
+Important: Always use 2>&1 to redirect stderr to stdout. This ensures all compiler errors, warnings, and build output are captured.
+Examples:
+- xcodebuild build 2>&1 | xcsift -w
+- xcodebuild test 2>&1 | xcsift -w
+- swift build 2>&1 | xcsift -w
+- swift test 2>&1 | xcsift -w
+
+# Structure hygiene
+Fix all errors, warnings, and failed tests, even if they are not related to the current changes being made.
+
+# grep or search text 
+You are operating in an environment where ast-grep is installed. 
+For any code search that requires understanding of syntax or code structure, you should default to using
+ast-grep --lang [language] -p '<pattern>'. 
+Adjust the --lang flag as needed for the specific programming language. 
+Avoid using text-only search tools unless a plain-text search is explicitly requested.
+
+# apple platforms tips
+Apple’s Essential Tips for iOS App Speed and Efficiency
+- Profile early and often using Instruments in Xcode 26. Identify bottlenecks in SwiftUI views and Foundation Model requests before you ship.
+- Optimise SwiftUI views by profiling view trees, caching expensive computations, and trimming main thread usage. Avoid repeated body - omputation to prevent dropped frames.
+- Streamline Foundation Model requests by reducing context payloads, removing redundant data, and keeping request windows small for faster - responses.
+- Make memory and algorithm improvements with Swift’s new InlineArray and Span types. Replace custom slow loops with built-in methods like - First(), and validate any speedups with flame graphs.
+- Accelerate app launch by deferring work not needed immediately. Move blocking network, file, and calculation calls off the main thread.
+- Minimise energy usage by using incremental updates instead of full reloads, and only fetching or displaying what users need right now.
+- Benchmark your changes and document optimisation decisions.
