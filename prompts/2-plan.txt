@@ -1,0 +1,10 @@
+We are going to build a macOS app for QR generation with the following features:
+  • A text field where the user can enter a value
+  • A button to generate a QR code, disabled until the user has entered meaningful text
+  • When the button is pressed, a QR code is generated and displayed
+  • In the QR code view, options to:
+  • Download the QR code as a PNG file
+  • Generate another PNG for new input
+  • A history of generated QR codes, persisted to a file
+  • A sidebar that shows the history and displays a preview of the selected QR code
+  The code must be written in Swift and SwiftUI. 
